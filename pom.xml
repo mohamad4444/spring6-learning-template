@@ -1,119 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.mohamad4444</groupId>
 	<artifactId>springtemplate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springtemplate</name>
 	<description>Demo project for Spring Boot</description>
-	<url/>
+	<url />
 	<licenses>
-		<license/>
+		<license />
 	</licenses>
 	<developers>
-		<developer/>
+		<developer />
 	</developers>
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection />
+		<developerConnection />
+		<tag />
+		<url />
 	</scm>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+		<!-- ===================================== -->
+		<!-- CORE SPRING BOOT DEPENDENCIES -->
+		<!-- ===================================== -->
+
+		<!-- Spring Boot Starter: Core Spring Boot functionality -->
+		<!-- Used by: All examples -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+
+		<!-- Spring Boot Actuator: Production-ready features (health checks, metrics) -->
+		<!-- Provides: /actuator endpoints for monitoring -->
+		<!-- Used by: Production deployments -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
+		<!-- ===================================== -->
+		<!-- DATA PERSISTENCE DEPENDENCIES -->
+		<!-- ===================================== -->
+
+		<!-- Spring Data JPA: SQL database integration with Hibernate -->
+		<!-- Used by: data2, data2Security1, data2Security2 -->
+		<!-- Provides: @Entity, @Repository, JpaRepository -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+
+		<!-- Spring Data MongoDB: NoSQL document database integration -->
+		<!-- Used by: data1 -->
+		<!-- Provides: @Document, MongoRepository -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+
+		<!-- PostgreSQL JDBC Driver: Required for PostgreSQL database connections -->
+		<!-- Used by: data2, data2Security1, data2Security2 -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- swagger-->
+
+		<!-- ===================================== -->
+		<!-- WEB & REST API DEPENDENCIES -->
+		<!-- ===================================== -->
+
+		<!-- Spring Boot Web: REST controllers, embedded Tomcat, JSON/XML support -->
+		<!-- Used by: All REST examples (rest, all controllers) -->
+		<!-- Provides: @RestController, @GetMapping, @PostMapping, etc. -->
 		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.2.0</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<!-- Jackson XML: XML serialization/deserialization for REST APIs -->
+		<!-- Used by: rest (XML content negotiation) -->
+		<!-- Allows endpoints to return XML in addition to JSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+
+		<!-- Feign Client: Declarative REST client (alternative to RestTemplate) -->
+		<!-- Used by: External API integration examples -->
+		<!-- Note: This is an older version, consider upgrading to spring-cloud-starter-openfeign -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-feign</artifactId>
 			<version>1.4.7.RELEASE</version>
 		</dependency>
+
+		<!-- ===================================== -->
+		<!-- SECURITY DEPENDENCIES -->
+		<!-- ===================================== -->
+
+		<!-- Spring Security: Authentication and authorization -->
+		<!-- Used by: data2Security1, data2Security2 -->
+		<!-- Provides: @EnableWebSecurity, UserDetailsService, password encoding -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- Spring Security Test: Testing support for secured endpoints -->
+		<!-- Used by: Security example tests -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- ===================================== -->
+		<!-- UI / TEMPLATE ENGINE DEPENDENCIES -->
+		<!-- ===================================== -->
+
+		<!-- Thymeleaf: Server-side template engine for HTML rendering -->
+		<!-- Used by: data2 (UIController.java) -->
+		<!-- Provides: HTML templates with data binding -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<!-- ===================================== -->
+		<!-- MESSAGING DEPENDENCIES -->
+		<!-- ===================================== -->
+
+		<!-- RabbitMQ: Message queue integration -->
+		<!-- Used by: Async messaging examples (if implemented) -->
+		<!-- Provides: @RabbitListener, message publishing/consuming -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+
+		<!-- ===================================== -->
+		<!-- CONFIGURATION & DEVELOPMENT TOOLS -->
+		<!-- ===================================== -->
+
+		<!-- Configuration Processor: Generates metadata for @ConfigurationProperties -->
+		<!-- Used by: config (ConfigurableController1B.java) -->
+		<!-- Provides: IDE autocomplete for custom properties -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
 
+		<!-- DevTools: Auto-restart, live reload during development -->
+		<!-- Only active in development, automatically disabled in production -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- ===================================== -->
+		<!-- UTILITY DEPENDENCIES -->
+		<!-- ===================================== -->
+
+		<!-- Lombok: Reduces boilerplate code (@Data, @Getter, @Setter, etc.) -->
+		<!-- Used by: All entity and DTO classes -->
+		<!-- Provides: Automatic generation of getters, setters, constructors -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.36</version>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- ===================================== -->
+		<!-- TESTING DEPENDENCIES -->
+		<!-- ===================================== -->
+
+		<!-- Spring Boot Test: Testing framework with JUnit, Mockito, etc. -->
+		<!-- Provides: @SpringBootTest, @WebMvcTest, MockMvc -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- ui -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-amqp</artifactId>
-		</dependency>
 
+		<!-- ===================================== -->
+		<!-- API DOCUMENTATION -->
+		<!-- ===================================== -->
 
+		<!-- SpringDoc OpenAPI: Automatic API documentation (Swagger UI) -->
+		<!-- Access at: http://localhost:8080/swagger-ui.html -->
+		<!-- Generates OpenAPI 3.0 specification from controllers -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.2.0</version>
+		</dependency>
 
 	</dependencies>
+
 
 	<build>
 		<plugins>
@@ -125,6 +225,7 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<version>1.18.36</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
