@@ -36,22 +36,25 @@ import java.util.List;
  * 
  * <p>
  * <b>Testing Examples:</b>
+ * These routes require authentication. POST requests also require a CSRF token
+ * and its matching session cookie; see docs/FIRST_STEPS.md for the api helper,
+ * credentials, base URL and CSRF variables used in the POST examples.
  * 
  * <pre>
  * # Test GET request returning JSON
- * curl http://localhost:8080/piplup
+ * curl -u ester.nutzer@hs-kl.de:user1-secret http://localhost:8080/rest/piplup
  * 
  * # Test GET request returning XML
- * curl http://localhost:8080/piplup-xml
+ * curl -u ester.nutzer@hs-kl.de:user1-secret http://localhost:8080/piplup-xml
  * 
  * # Test custom HTTP status code (418 I'm a teapot)
- * curl -v http://localhost:8080/piplup-teapot
+ * curl -v -u ester.nutzer@hs-kl.de:user1-secret http://localhost:8080/piplup-teapot
  * 
  * # Test POST with query parameters
- * curl -X POST "http://localhost:8080/me?name=John&age=25&favorites=Java&favorites=Spring"
+ * api -X POST -H "$csrf_header: $csrf_token" "$base/rest/me?name=John&age=25&favorites=Java&favorites=Spring"
  * 
  * # Test POST with JSON body
- * curl -X POST http://localhost:8080/me-body \
+ * api -X POST -H "$csrf_header: $csrf_token" "$base/me-body" \
  *   -H "Content-Type: application/json" \
  *   -d '{"name":"John","age":25,"favoriteThings":["Java","Spring"]}'
  * </pre>
@@ -151,7 +154,7 @@ public class RestVerbController {
 	 * 
 	 * <p>
 	 * Query parameters are extracted from the URL:
-	 * {@code /me?name=John&age=25&favorites=Java&favorites=Spring}
+	 * {@code /rest/me?name=John&age=25&favorites=Java&favorites=Spring}
 	 * 
 	 * <p>
 	 * Spring Boot automatically:

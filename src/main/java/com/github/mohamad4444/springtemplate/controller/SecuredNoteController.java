@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.github.mohamad4444.springtemplate.service.SecuredNoteService;
 
+@org.springframework.context.annotation.Profile("academic")
 @RestController
 public class SecuredNoteController {
 

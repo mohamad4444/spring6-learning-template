@@ -1,0 +1,11 @@
+**/target
+.git
+**/.idea
+**/.vscode
+**/.env
+**/.env.*
+**/*.log
+**/.folder_tags.json
+**/__pycache__
+docs
+examples

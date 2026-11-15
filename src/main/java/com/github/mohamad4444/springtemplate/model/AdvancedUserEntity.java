@@ -17,6 +17,7 @@ public class AdvancedUserEntity {
 	private String firstName;
 	private String lastName;
 
+	@Column(nullable = false, unique = true)
 	private String email;
 
 	// do not include the password in any json!

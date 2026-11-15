@@ -17,6 +17,7 @@ import java.util.Collection;
 import com.github.mohamad4444.springtemplate.model.LoginDtoOut;
 
 @CrossOrigin
+@org.springframework.context.annotation.Profile("academic")
 @RestController
 @RequestMapping("/benutzer")
 public class BenutzerController

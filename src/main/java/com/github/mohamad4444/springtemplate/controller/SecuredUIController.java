@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.github.mohamad4444.springtemplate.model.SecuredNoteCreate;
 import com.github.mohamad4444.springtemplate.service.SecuredNoteService;
 
+@org.springframework.context.annotation.Profile("academic")
 @Controller
 public class SecuredUIController {
 
@@ -16,27 +17,27 @@ public class SecuredUIController {
 		this.noteService = noteService;
 	}
 
-	@GetMapping("ui/notes")
+	@GetMapping("ui/secured-notes")
 	public String handleGet(Model model) {
 		this.addNotesAndNewSecuredNoteCreate(model);
-		
-		return "notes";
+
+		return "secured-notes";
 	}
-	
-	@PostMapping("ui/notes")
+
+	@PostMapping("ui/secured-notes")
 	public String handlePost(@ModelAttribute("newNote") SecuredNoteCreate noteCreate, Model model) {
 		final var createdSecuredNoteEntity = this.noteService.create(noteCreate.note(), noteCreate.tag());
 		model.addAttribute("message", "Successfully created a new note with id " + createdSecuredNoteEntity.getId());
 		this.addNotesAndNewSecuredNoteCreate(model);
-		return "notes";
+		return "secured-notes";
 	}
 
-	@DeleteMapping("ui/notes/{id}")
+	@DeleteMapping("ui/secured-notes/{id}")
 	public String handleDelete(@PathVariable Long id, Model model) {
 		this.noteService.deleteById(id);
 		this.addNotesAndNewSecuredNoteCreate(model);
-		
-		return "redirect:/ui/notes";
+
+		return "redirect:/ui/secured-notes";
 	}
 
 	private void addNotesAndNewSecuredNoteCreate(Model model) {

@@ -1,0 +1,77 @@
+# Local development only. Use managed secrets and TLS for deployed environments.
+name: springtemplate
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: springtemplate
+      POSTGRES_USER: ${DB_USERNAME:-springtemplate}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-local-only-change-me}
+    ports: ["127.0.0.1:${POSTGRES_PORT:-5432}:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  mysql:
+    image: mysql:8.4
+    profiles: [mysql]
+    environment:
+      MYSQL_DATABASE: springtemplate
+      MYSQL_USER: ${DB_USERNAME:-springtemplate}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-local-only-change-me}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-local-root-only-change-me}
+    ports: ["127.0.0.1:${MYSQL_PORT:-3306}:3306"]
+    volumes: ["mysql-data:/var/lib/mysql"]
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_PASSWORD mysql -h 127.0.0.1 -u $$MYSQL_USER -D $$MYSQL_DATABASE -e 'SELECT 1'"]
+      interval: 5s
+      timeout: 5s
+      start_period: 30s
+      retries: 20
+  mongo:
+    image: mongo:8.0
+    profiles: [mongo]
+    ports: ["127.0.0.1:${MONGO_PORT:-27017}:27017"]
+    volumes: ["mongo-data:/data/db"]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  rabbitmq:
+    image: rabbitmq:4-management
+    profiles: [messaging]
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME:-springtemplate}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-local-only-change-me}
+    ports: ["127.0.0.1:${RABBITMQ_PORT:-5672}:5672", "127.0.0.1:${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"]
+    volumes: ["rabbit-data:/var/lib/rabbitmq"]
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  app:
+    build:
+      context: ..
+      dockerfile: iac/Dockerfile
+    profiles: [app]
+    ports: ["127.0.0.1:${APP_PORT:-8080}:8080"]
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev,postgresql}
+      DB_URL: jdbc:postgresql://postgres:5432/springtemplate
+      DB_USERNAME: ${DB_USERNAME:-springtemplate}
+      DB_PASSWORD: ${DB_PASSWORD:-local-only-change-me}
+      MONGODB_URI: mongodb://mongo:27017/springtemplate
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME:-springtemplate}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-local-only-change-me}
+    depends_on:
+      postgres: {condition: service_healthy}
+volumes:
+  postgres-data:
+  mysql-data:
+  mongo-data:
+  rabbit-data:

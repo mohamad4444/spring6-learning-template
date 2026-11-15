@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @CrossOrigin
+@org.springframework.context.annotation.Profile("academic")
 @RestController
 @RequestMapping("access")
 public class AccessController
@@ -36,7 +37,7 @@ public class AccessController
 
         Benutzer benutzer = dbAccessService.getBenutzerByBenutzername(benutzerName);
 
-        if ( PasswordTools.checkPassword(password, benutzer.getPasswordSalt(), benutzer.getPasswordHash()) ) {
+        if ( benutzer == null || !PasswordTools.checkPassword(password, benutzer.getPasswordHash(), benutzer.getPasswordSalt()) ) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 

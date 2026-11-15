@@ -1,0 +1,46 @@
+@baseUrl = http://localhost:8080
+@username = ester.nutzer@hs-kl.de
+@password = user1-secret
+
+### Public health
+GET {{baseUrl}}/actuator/health
+
+### Session identity
+GET {{baseUrl}}/api/v1/me
+Authorization: Basic {{username}} {{password}}
+
+### Fetch a CSRF token; keep the session cookie for later requests.
+# Copy token to csrfToken and headerName to the header below.
+GET {{baseUrl}}/api/v1/csrf
+Authorization: Basic {{username}} {{password}}
+
+### Fill from the previous response. Your client must retain JSESSIONID.
+@csrfToken = replace-with-token
+POST {{baseUrl}}/api/v1/tasks
+Authorization: Basic {{username}} {{password}}
+X-CSRF-TOKEN: {{csrfToken}}
+Content-Type: application/json
+
+{"title":"Learn Spring", "description":"Start with the task API"}
+
+### List owned tasks
+GET {{baseUrl}}/api/v1/tasks?status=TODO&page=0&size=20&sort=createdAt,desc
+Authorization: Basic {{username}} {{password}}
+
+### Read the ID from creation
+@taskId = replace-with-task-id
+GET {{baseUrl}}/api/v1/tasks/{{taskId}}
+Authorization: Basic {{username}} {{password}}
+
+### Use the current version from GET; stale updates return 409.
+PUT {{baseUrl}}/api/v1/tasks/{{taskId}}
+Authorization: Basic {{username}} {{password}}
+X-CSRF-TOKEN: {{csrfToken}}
+Content-Type: application/json
+
+{"title":"Learn Spring", "description":"Finished", "status":"DONE", "version":0}
+
+### Delete
+DELETE {{baseUrl}}/api/v1/tasks/{{taskId}}
+Authorization: Basic {{username}} {{password}}
+X-CSRF-TOKEN: {{csrfToken}}

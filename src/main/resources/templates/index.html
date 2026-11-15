@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spring Boot Learning Template</title>
+<style>
+body{margin:0;background:#f5f7fa;color:#17243a;font:16px/1.6 system-ui,sans-serif}main{max-width:960px;margin:70px auto;padding:24px}h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.1}a{color:#15673b}nav{display:flex;gap:24px;flex-wrap:wrap}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:32px 0}article{background:white;padding:24px;border:1px solid #dce4eb;border-radius:12px}code{background:#e8eef2;padding:3px 6px;border-radius:4px}.eyebrow{color:#15673b;font-weight:700;letter-spacing:.12em}small{color:#526078}
+</style></head><body><main>
+<p class="eyebrow">JAVA 21 · SPRING BOOT <span th:text="${springBootVersion}"></span> · SPRING FRAMEWORK <span th:text="${springFrameworkVersion}"></span></p>
+<h1>College Spring lessons<br>in one application.</h1>
+<p>A combined collection of lessons and exercises: controllers, configuration, REST, persistence, security, browser clients, and integrations.</p>
+<nav aria-label="Resources"><a href="/swagger-ui.html">Explore API documentation</a><a href="/login">Sign in</a><a href="/actuator/health">Check health</a></nav>
+<section class="cards" aria-label="College lessons">
+<article><h2>1. Controllers and configuration</h2><p>Begin with a text response, then compare property injection and structured configuration.</p><a href="/hello">Hello World</a> · <a href="/example">Configuration example</a></article>
+<article><h2>2. REST and DTOs</h2><p>Explore request binding, JSON and XML responses, and HTTP status codes. Sign in for these lessons.</p><a href="/rest/piplup">JSON response</a> · <a href="/piplup-xml">XML response</a></article>
+<article><h2>3. Persistence and security</h2><p>Compare JPA notes, secured CRUD, Thymeleaf pages, and the Benutzer browser exercise.</p><p th:unless="${academicEnabled}">Enable the college exercises with <code>--spring.profiles.active=academic</code> when starting the JAR, or follow the README's Maven command.</p><nav th:if="${academicEnabled}" aria-label="Academic exercises"><a href="/ui/notes">JPA notes</a><a href="/ui/secured-notes">Secured notes</a><a href="/academic/notizen/demo.html">Benutzer exercise</a></nav></article>
+<article><h2>4. Putting it together</h2><p>The task API combines validation, ownership, pagination, and optimistic concurrency. Follow the walkthrough in <code>docs/FIRST_STEPS.md</code>.</p><a href="/api/v1/tasks">Task API</a> · <a href="/api/v1/me">Current user</a></article>
+<article><h2>5. Databases and integrations</h2><p>Start with H2, then study PostgreSQL, MySQL, MongoDB, external HTTP clients, and RabbitMQ. See <code>docs/CONFIGURATION.md</code> for the required profiles and services.</p></article>
+</section>
+<p>The repository README lists the lessons, source files, Spring versions, demo credentials, and commands. Continue with <code>docs/LEARNING.md</code> for the full example catalog.</p>
+<small>Development data is temporary. Production requires explicit database configuration and does not seed demo accounts.</small>
+</main></body></html>

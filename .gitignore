@@ -31,3 +31,14 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Local configuration and generated artifacts
+.env
+.env.*
+!.env.example
+*.log
+.folder_tags.json
+.DS_Store
+__pycache__/
+cookies.txt
+csrf.json

@@ -18,10 +18,10 @@ public class Benutzer
     private String vorname;
     private String nachname;
     private String benutzername;
-    @Column(name = "password_hash", nullable = false, columnDefinition = "BINARY")
+    @Column(name = "password_hash", nullable = false)
     private byte[] passwordHash;
 
-    @Column(name = "password_salt", nullable = false, columnDefinition = "BINARY")
+    @Column(name = "password_salt", nullable = false)
     private byte[] passwordSalt;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)

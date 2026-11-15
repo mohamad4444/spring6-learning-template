@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Benutzer-Demo · Spring Template</title>
+  <link rel="stylesheet" href="./css/mystyle.css">
+  <script type="text/javascript" src="./js/my_scripts.js"></script>
+</head>
+
+<body>
+  <h1>Benutzer-Demo</h1>
+  <p>Diese Lernanwendung verwendet das Backend dieses Spring-Projekts.
+    <a href="/login">Spring-Anmeldung</a> · <a href="/">Startseite</a></p>
+  <p>Die Benutzer unten gehören zur separaten Benutzer-/Token-Übung.
+    Die Spring-Anmeldung bleibt auch nach „Abmelden“ in dieser Übung bestehen.</p>
+
+  <table>
+    <tr>
+      <td>
+        <h2>Registriere Benutzer</h2>
+        <table>
+          <tr>
+            <td> Vorname:</td>
+            <td><input id="regVorname" type="text"></td>
+          </tr>
+          <tr>
+            <td> Nachname:</td>
+            <td><input id="regNachname" type="text"></td>
+          </tr>
+          <tr>
+            <td> Benutzername:</td>
+            <td><input id="regBenutzername" type="text"></td>
+          </tr>
+          <tr>
+            <td> Password:</td>
+            <td><input id="regPassword" type="password"></td>
+          </tr>
+          <tr>
+            <td colspan="2"><button id="registerBtn" type="button">
+                Registrieren</button></td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <div style="width: 50px;"> </div>
+      </td>
+      <td>
+        <h2>Login Benutzer</h2>
+        <table>
+          <tr>
+            <td> Benutzername:</td>
+            <td><input id="loginBenutzername" type="text"></td>
+          </tr>
+          <tr>
+            <td> Password:</td>
+            <td><input id="loginPassword" type="password"></td>
+          </tr>
+          <tr>
+            <td colspan="2"><button id="loginBtn" type="button">
+                Anmelden</button></td>
+          </tr>
+          <tr>
+            <td>
+              <hr>
+              <p></p><button id="logoutBtn" type="button">Abmelden</button>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <hr />
+
+  <h2>Logindaten</h2>
+  BenutzeId: <span id="outBenutzerId"></span> <br />
+  Benutzername: <span id="outBenutzername"></span> <br />
+  AccessToken: <span id="outAccessToken"></span>
+  <hr />
+
+
+
+  <div id="error" style="color: red;"></div>
+
+
+  <hr>
+  <table>
+    <tr>
+      <td>
+        <h2>Update Benutzer</h2>
+        <table>
+          <tr>
+            <td> Vorname:</td>
+            <td><input id="updateVorname" type="text"></td>
+          </tr>
+          <tr>
+            <td> Nachname:</td>
+            <td><input id="updateNachname" type="text"></td>
+          </tr>
+          <tr>
+            <td> Password:</td>
+            <td><input id="updatePassword" type="password"></td>
+          </tr>
+          <tr>
+            <td colspan="2"><button id="updateBtn" type="button">
+                Benutzerdaten ändern</button></td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <div style="width: 50px;"> </div>
+      </td>
+      <td>
+        <h2>Lösche Benutzer</h2>
+        <table>
+          <tr>
+            <td colspan="2"><button id="deleteBtn" type="button">
+                Benutzer löschen</button></td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <hr>
+  <h2>Alle Benutzer</h2>
+  <button id="alleBenutzerBtn" type="button">Alle Benutzer</button>
+  <hr />
+  <div id="outAlleBenutzer"></div>
+
+
+</body>
+
+</html>

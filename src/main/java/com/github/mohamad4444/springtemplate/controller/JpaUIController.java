@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.github.mohamad4444.springtemplate.model.JpaNoteCreate;
 
+@org.springframework.context.annotation.Profile("academic")
 @Controller
 public class JpaUIController {
 
@@ -19,10 +20,10 @@ public class JpaUIController {
 	@GetMapping("ui/notes")
 	public String handleGet(Model model) {
 		this.addNotesAndNewJpaNoteCreate(model);
-		
+
 		return "notes";
 	}
-	
+
 	@PostMapping("ui/notes")
 	public String handlePost(@ModelAttribute("newNote") JpaNoteCreate noteCreate, Model model) {
 		final var createdJpaNoteEntity = this.noteService.create(noteCreate.note(), noteCreate.tag());
@@ -35,7 +36,7 @@ public class JpaUIController {
 	public String handleDelete(@PathVariable Long id, Model model) {
 		this.noteService.deleteById(id);
 		this.addNotesAndNewJpaNoteCreate(model);
-		
+
 		return "redirect:/ui/notes";
 	}
 

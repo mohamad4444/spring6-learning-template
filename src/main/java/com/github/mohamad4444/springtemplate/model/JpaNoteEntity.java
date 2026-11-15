@@ -3,7 +3,7 @@ package com.github.mohamad4444.springtemplate.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "note")
+@Table(name = "jpa_note")
 public class JpaNoteEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,16 +11,16 @@ public class JpaNoteEntity {
 
 	private String note;
 	private String tag;
-	
+
 	public JpaNoteEntity() {
 	}
-	
+
 	public JpaNoteEntity(String note, String tag) {
 		super();
 		this.note = note;
 		this.tag = tag;
 	}
-	
+
 	public JpaNoteEntity(Long id, String note, String tag) {
 		super();
 		this.id = id;

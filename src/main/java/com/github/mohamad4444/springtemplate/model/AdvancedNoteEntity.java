@@ -6,7 +6,7 @@ import java.util.UUID;
 import com.github.mohamad4444.springtemplate.model.AdvancedNoteEntity;
 
 @Entity
-@Table(name = "note")
+@Table(name = "advanced_note")
 public class AdvancedNoteEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,19 +14,19 @@ public class AdvancedNoteEntity {
 
 	private String note;
 	private String tag;
-	
+
 	private UUID creatorId;
-	
+
 	public AdvancedNoteEntity() {
 	}
-	
+
 	public AdvancedNoteEntity(String note, String tag, UUID creatorId) {
 		super();
 		this.note = note;
 		this.tag = tag;
 		this.creatorId = creatorId;
 	}
-	
+
 	public AdvancedNoteEntity(Long id, String note, String tag, UUID creatorId) {
 		super();
 		this.id = id;

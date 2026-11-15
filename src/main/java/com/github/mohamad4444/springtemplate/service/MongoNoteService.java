@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@org.springframework.context.annotation.Profile("mongo")
 @Service
 public class MongoNoteService {
 

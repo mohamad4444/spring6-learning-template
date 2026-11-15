@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+@org.springframework.context.annotation.Profile("academic")
 @RestController
 public class AdvancedNoteController {
 	private final Logger LOGGER = LoggerFactory.getLogger(AdvancedNoteController.class);
@@ -34,7 +35,7 @@ public class AdvancedNoteController {
 	public ResponseEntity<AdvancedNoteEntity> handlePost(@RequestBody AdvancedNotePostRequestBody requestBody,
 			@AuthenticationPrincipal AdvancedAuthenticatedUser authenticatedUser) {
 		LOGGER.info("POST request to create a new note by user " + authenticatedUser);
-		
+
 		final var note = this.noteService.create(requestBody.note(), requestBody.tag(), authenticatedUser);
 
 		return new ResponseEntity<>(note, HttpStatus.OK);

@@ -1,0 +1,45 @@
+name: Build and test
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: ['21', '25']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+          cache: maven
+      - run: ./mvnw -B -ntp clean verify
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports-java-${{ matrix.java }}
+          path: |
+            target/surefire-reports
+            target/site/jacoco
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - run: ./mvnw -B -ntp -Pintegration verify
+      - run: docker compose --env-file iac/.env.example -f iac/compose.yaml --profile '*' config --quiet
+      - run: docker build -f iac/Dockerfile -t springtemplate:ci .
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: integration-reports
+          path: target/failsafe-reports

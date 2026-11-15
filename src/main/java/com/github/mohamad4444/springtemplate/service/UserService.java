@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@org.springframework.context.annotation.Profile("messaging")
 @Service
 public class UserService {
     @Autowired
