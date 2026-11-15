@@ -10,7 +10,7 @@ import org.springframework.context.annotation.*;
 public class OpenApiConfig {
     @Bean
     OpenAPI api() {
-        return new OpenAPI().info(new Info().title("Spring Boot Learning Template API").version("v1")
+        return new OpenAPI().info(new Info().title("Spring 6 SpringBoot 3.5 learning API").version("v1")
                 .description("Combined college lessons in REST, persistence, security and integrations. "
                     + "Tasks require authentication. Session requests also require a CSRF token for writes."))
             .components(new Components()

@@ -1,4 +1,4 @@
-# Spring Boot 3.5 Learning Template
+# Spring 6 SpringBoot 3.5 learning
 
 A combined collection of lessons and exercises from college, kept in one runnable Spring application. It covers the progression from a first HTTP controller to configuration, REST, databases, security, browser clients, and integrations. The task API brings several of these topics together in a worked example.
 
