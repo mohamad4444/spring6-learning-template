@@ -19,7 +19,7 @@ jobs:
           java-version: ${{ matrix.java }}
           cache: maven
       - run: ./mvnw -B -ntp clean verify
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: test-reports-java-${{ matrix.java }}
@@ -38,7 +38,7 @@ jobs:
       - run: ./mvnw -B -ntp -Pintegration verify
       - run: docker compose --env-file iac/.env.example -f iac/compose.yaml --profile '*' config --quiet
       - run: docker build -f iac/Dockerfile -t springtemplate:ci .
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: integration-reports
