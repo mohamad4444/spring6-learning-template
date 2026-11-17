@@ -5,7 +5,7 @@
   <groupId>com.github.mohamad4444</groupId><artifactId>springtemplate</artifactId><version>1.0.0-SNAPSHOT</version>
   <name>Spring 6 Learning Template</name>
   <description>Combined college lessons and exercises in Spring Boot: configuration, REST, persistence, security, MVC and integrations</description>
-  <properties><java.version>21</java.version><springdoc.version>2.8.17</springdoc.version></properties>
+  <properties><java.version>21</java.version><springdoc.version>3.2.0</springdoc.version></properties>
   <dependencies>
     <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
     <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-validation</artifactId></dependency>
